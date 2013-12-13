@@ -38,6 +38,7 @@
     this.dir = newDir;
   }
   
+  Snake.SYMBOL = "S";
   
   //Board obj
   var Board = SnakeGame.Board = function(dim) {
