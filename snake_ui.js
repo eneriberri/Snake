@@ -17,8 +17,9 @@
   
   View.prototype.start = function() {
     this.board = new SnakeGame.Board(View.DIMENSIONS);
-    $(window).keydown(this.handleKeyEvent.bind(this));
-    this.intervalID = window.setInterval(this.step(), 500);
+    var that = this;
+    $(window).keydown(function(event) { that.handleKeyEvent(event); });
+    this.intervalID = window.setInterval(function() { that.step() }, 1000);
   };
   
   View.prototype.handleKeyEvent = function(event) {
