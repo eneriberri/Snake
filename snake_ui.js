@@ -13,18 +13,25 @@
     this.$el.on('keydown');
   };
   
-  View.prototype.handleKeyEvent(event) {
+  View.prototype.handleKeyEvent = function(event) {
     var val = event.keyCode;
     if(val === 37) //left arrow
+      this.board.snake.turn("W");
+    else if(val === 38) //up arrow
+      this.board.snake.turn("N");
+    else if(val === 39) //right arrow
+      this.board.snake.turn("E");
+    else if(val === 40) //down arrow
+      this.board.snake.turn("S");
+    
+    setInterval(function() { this.step() }, 500);
   };
   
-  View.KEYCODES = {
-    37: 
-    37      37      37      37      37      Left arrow
-     38      38      38      38      38      Up arrow
-     39      39      39      39      39      Right arrow
-     40      40      40      40      40      Down arrow
-  }
+  View.prototype.step = function() {
+    this.board.snake.move();
+    var display = this.board.render();
+    this.$el.html(display);
+  };
   
   
   
