@@ -6,25 +6,24 @@
     this.board = null;
   };
   
-  View.DIMENSIONS = 500;
+  View.DIMENSIONS = 20;
+  
+  View.KEYS = {
+    37: "W",
+    38: "N",
+    39: "E",
+    40: "S"
+  };
   
   View.prototype.start = function() {
-    this.board = new Board(View.DIMENSIONS);
-    this.$el.on('keydown');
+    this.board = new SnakeGame.Board(View.DIMENSIONS);
+    $(window).keydown(this.handleKeyEvent.bind(this));
+    this.intervalID = window.setInterval(this.step(), 500);
   };
   
   View.prototype.handleKeyEvent = function(event) {
-    var val = event.keyCode;
-    if(val === 37) //left arrow
-      this.board.snake.turn("W");
-    else if(val === 38) //up arrow
-      this.board.snake.turn("N");
-    else if(val === 39) //right arrow
-      this.board.snake.turn("E");
-    else if(val === 40) //down arrow
-      this.board.snake.turn("S");
-    
-    setInterval(function() { this.step() }, 500);
+    var dir = View.KEYS[event.keyCode];
+    if(dir) this.board.snake.turn(dir);  
   };
   
   View.prototype.step = function() {
@@ -32,6 +31,11 @@
     var display = this.board.render();
     this.$el.html(display);
   };
+  
+  $(document).ready(function() {
+    var SG = new SnakeGame.View($('#grid'));
+    SG.start();
+  });
   
   
   
