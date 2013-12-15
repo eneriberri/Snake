@@ -47,10 +47,9 @@
   
   $(document).ready(function() {
     var SG = new SnakeGame.View($('#grid'));
+    //start game upon any key stroke, triggers event only once
     $(window).one('keydown', function() { SG.start() });
-    // SG.start();
-  });
-  
+  }); 
   
   
 })(this);

@@ -17,7 +17,9 @@
     this.board = board;
     this.dir = "S";
     var center = Math.floor(board.dim/2);
-    this.segments = [new Coord(center, center)];
+    this.segments = [new Coord(center, center), 
+                     new Coord(center-1, center), 
+                     new Coord(center-2, center)];
   };
   
   Snake.MOVES = {
@@ -30,7 +32,7 @@
   //move by adding to the front of the snake, and cutting off last piece
   Snake.prototype.move = function() {
     var moveCoord = Snake.MOVES[this.dir];
-    var head = this.segments[0];
+    var head = _(this.segments).last();
     this.segments.push(head.plus(moveCoord));
     this.segments.shift();
   };
@@ -65,10 +67,6 @@
     console.log(_(grid).map(function (row) { //for debugging
       return row.join(""); 
     }).join("\n"));
-  
-    // return _(grid).map(function (row) { 
-    //   return row.join(""); 
-    // }).join("\n");
     
     return grid;
   };
