@@ -1,5 +1,14 @@
 .cell {
   display: inline-block;
+  text-align: center;
+  border: 1px solid white;
+  width: 20px;  
+}
+
+.snake {
   border: 1px solid black;
-  width: 20px;
+}
+
+#grid {
+ border: 1px solid black; 
 }

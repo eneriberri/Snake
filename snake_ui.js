@@ -35,10 +35,14 @@
   
   View.prototype.render = function() {
     var grid = this.board.render();
+    console.log(grid)
     for(var i = 0; i < grid.length; i++) {
       var row = "";
       for(var j = 0; j < grid[i].length; j++) {
-        row += "<span class='cell'>" + grid[i][j] + "</span>";
+        if(grid[i][j] === SnakeGame.Snake.SYMBOL)
+          row += "<span class='cell snake'>" + grid[i][j] + "</span>";
+        else 
+          row += "<span class='cell'>" + grid[i][j] + "</span>";
       }
       this.$el.append("<div class='row'>" + row + "</div>");
     }
