@@ -122,7 +122,7 @@
     this.pos;
   };
   
-  Apple.SYMBOL = "A";
+  Apple.SYMBOL = "&#10084";
   
   Apple.prototype.generate = function() {
     

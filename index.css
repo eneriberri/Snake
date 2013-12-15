@@ -1,42 +1,52 @@
 body {
-  color: #B53533;
+  color: #4BB5C1;
   font-family: 'Droid Sans', sans-serif;
+  background-color: #EDF7F2;
+}
+
+header {
+    margin-top: 55px;
 }
 
 h1 {
   font-family: 'Montserrat Subrayada', sans-serif;
+  font-size: 300%;
 }
 
 .cell {
   display: inline-block;
   text-align: center;
-  border: 1px solid white;
-  color: white;
+  border: 1px solid #EDF7F2;
+  color: #EDF7F2;
   width: 20px; 
   -moz-border-radius: 10px;
   border-radius: 10px 
 }
 
 .snake {
-  color: #294447;
-  background: #294447;
+  color: #96CA2D;
+  background: #96CA2D;
 }
 
 .apple {
-  color: #B53533;
-}
-
-#grid {
- display: inline-block;
- border: 1px solid black; 
- -moz-border-radius: 10px;
- border-radius: 10px 
+  color: #7FC6BC;
 }
 
 #content {
   text-align: center;
 }
 
+#grid {
+ display: inline-block;
+ border: 1px solid #7A7D7F; 
+ -moz-border-radius: 10px;
+ border-radius: 10px 
+}
+
 h1 {
   text-transform: uppercase;
+}
+
+h3, #instructions {
+  display: none;
 }

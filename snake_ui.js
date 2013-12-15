@@ -30,6 +30,7 @@
   View.prototype.step = function() {
     var playGame = this.board.snake.move();
     if(!playGame) { //game over! 
+      // $('#grid').effect( "bounce", {times: 4 }, "slow" );
       window.clearInterval(this.intervalID); 
     }
     else {
@@ -56,9 +57,17 @@
   };
   
   $(document).ready(function() {
+    $('h3').fadeIn('slow');
     var SG = new SnakeGame.View($('#grid'));
     //start game upon any key stroke, triggers event only once
-    $(window).one('keydown', function() { SG.start() });
+    $(window).one('keydown', function() { 
+      SG.start();
+      window.setTimeout(function() {
+        $('#instructions').fadeIn('slow');
+      }, 1000);
+    
+    });
+    
   }); 
   
   
