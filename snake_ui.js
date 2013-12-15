@@ -29,8 +29,20 @@
   
   View.prototype.step = function() {
     this.board.snake.move();
-    var display = this.board.render();
-    this.$el.html(display);
+    this.$el.empty();
+    this.render();
+  };
+  
+  View.prototype.render = function() {
+    var grid = this.board.render();
+    for(var i = 0; i < grid.length; i++) {
+      var row = "";
+      for(var j = 0; j < grid[i].length; j++) {
+        row += grid[i][j];
+      }
+      this.$el.append(row + "<br>");
+    }
+    
   };
   
   $(document).ready(function() {

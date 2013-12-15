@@ -66,9 +66,11 @@
       return row.join(""); 
     }).join("\n"));
   
-    return _(grid).map(function (row) { 
-      return row.join(""); 
-    }).join("\n");
+    // return _(grid).map(function (row) { 
+    //   return row.join(""); 
+    // }).join("\n");
+    
+    return grid;
   };
   
 })(this);
