@@ -36,9 +36,13 @@
     var newHead = head.plus(moveCoord);
     this.segments.push(newHead);
     this.segments.shift();
-  
+    
     if(this.outOfBounds(newHead)) return true;
-    else return false;
+    else if(this.board.grid[newHead.row][newHead.col] === Apple.SYMBOL) {
+      var last = _(this.segments).last();
+      this.segments.push(last.plus(moveCoord));
+    }
+    return false;
   };
   
   Snake.prototype.outOfBounds = function(newHead) {
@@ -78,6 +82,14 @@
     });
     
     //generate apple if it doesn't exist yet
+    this.displayApple(grid);
+    
+    this.grid = grid; 
+    return grid;
+  };
+  
+  
+  Board.prototype.displayApple = function(grid) {
     if(typeof this.apple.pos === 'undefined') {
       while(true) {
         this.apple.generate();
@@ -91,10 +103,7 @@
     else {
       grid[this.apple.pos.row][this.apple.pos.col] = Apple.SYMBOL;
     }
-    
-    this.grid = grid;  
-    return grid;
-  };
+  }
   
   
   //Apple object
