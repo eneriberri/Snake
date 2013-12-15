@@ -15,7 +15,7 @@
   //Snake obj
   var Snake = SnakeGame.Snake = function(board) {
     this.board = board;
-    this.dir = "N";
+    this.dir = "S";
     var center = Math.floor(board.dim/2);
     this.segments = [new Coord(center, center)];
   };

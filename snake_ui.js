@@ -40,14 +40,15 @@
       for(var j = 0; j < grid[i].length; j++) {
         row += grid[i][j];
       }
-      this.$el.append(row + "<br>");
+      this.$el.append("<div class='row'>" + row + "</div>");
     }
     
   };
   
   $(document).ready(function() {
     var SG = new SnakeGame.View($('#grid'));
-    SG.start();
+    $(window).one('keydown', function() { SG.start() });
+    // SG.start();
   });
   
   
