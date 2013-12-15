@@ -34,17 +34,26 @@
     var moveCoord = Snake.MOVES[this.dir];
     var head = _(this.segments).last();
     var newHead = head.plus(moveCoord);
+    
+    if(this.outOfBounds(newHead)) return false; //out of bounds, game over
+    
     this.segments.push(newHead);
     this.segments.shift();
     
-    if(this.outOfBounds(newHead)) return true;
-    else if(this.board.grid[newHead.row][newHead.col] === Apple.SYMBOL) {
+    //moved to apple (todo: add check for moving onto itself)
+    var pos = this.board.grid[newHead.row][newHead.col];
+    this.checkMove(pos, moveCoord);  
+    
+    return true;
+  };
+  
+  Snake.prototype.checkMove = function(pos, moveCoord) {
+    if(pos === Apple.SYMBOL) {
       var last = _(this.segments).last();
       this.segments.push(last.plus(moveCoord));
-      this.board.apple.pos = null;
+      this.board.apple.pos = null; //clear the apple eaten
     }
-    return false;
-  };
+  }
   
   Snake.prototype.outOfBounds = function(newHead) {
     var border = this.board.dim;

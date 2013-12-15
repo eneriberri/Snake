@@ -19,7 +19,7 @@
     this.board = new SnakeGame.Board(View.DIMENSIONS);
     var that = this;
     $(window).keydown(function(event) { that.handleKeyEvent(event); });
-    this.intervalID = window.setInterval(function() { that.step() }, 300);
+    this.intervalID = window.setInterval(function() { that.step() }, 200);
   };
   
   View.prototype.handleKeyEvent = function(event) {
@@ -28,8 +28,8 @@
   };
   
   View.prototype.step = function() {
-    var gameOver = this.board.snake.move();
-    if(gameOver) { 
+    var playGame = this.board.snake.move();
+    if(!playGame) { //game over! 
       window.clearInterval(this.intervalID); 
     }
     else {

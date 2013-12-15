@@ -1,21 +1,42 @@
+body {
+  color: #B53533;
+  font-family: 'Droid Sans', sans-serif;
+}
+
+h1 {
+  font-family: 'Montserrat Subrayada', sans-serif;
+}
+
 .cell {
   display: inline-block;
   text-align: center;
   border: 1px solid white;
   color: white;
-  width: 20px;  
+  width: 20px; 
+  -moz-border-radius: 10px;
+  border-radius: 10px 
 }
 
 .snake {
-  color: black;
-  background: black;
+  color: #294447;
+  background: #294447;
 }
 
 .apple {
-  color: red;
+  color: #B53533;
 }
 
 #grid {
  display: inline-block;
  border: 1px solid black; 
+ -moz-border-radius: 10px;
+ border-radius: 10px 
+}
+
+#content {
+  text-align: center;
+}
+
+h1 {
+  text-transform: uppercase;
 }
