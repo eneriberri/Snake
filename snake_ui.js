@@ -19,7 +19,7 @@
     this.board = new SnakeGame.Board(View.DIMENSIONS);
     var that = this;
     $(window).keydown(function(event) { that.handleKeyEvent(event); });
-    this.intervalID = window.setInterval(function() { that.step() }, 1000);
+    this.intervalID = window.setInterval(function() { that.step() }, 300);
   };
   
   View.prototype.handleKeyEvent = function(event) {
@@ -38,7 +38,7 @@
     for(var i = 0; i < grid.length; i++) {
       var row = "";
       for(var j = 0; j < grid[i].length; j++) {
-        row += grid[i][j];
+        row += "<span class='cell'>" + grid[i][j] + "</span>";
       }
       this.$el.append("<div class='row'>" + row + "</div>");
     }
