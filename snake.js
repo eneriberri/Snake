@@ -36,10 +36,7 @@
     var newHead = head.plus(moveCoord);
     this.segments.push(newHead);
     this.segments.shift();
-    
-    console.log(newHead.row);
-    console.log(newHead.col);
-    console.log(this.outOfBounds(newHead));
+  
     if(this.outOfBounds(newHead)) return true;
     else return false;
   };
@@ -60,6 +57,7 @@
   var Board = SnakeGame.Board = function(dim) {
     this.dim = dim;
     this.snake = new Snake(this);
+    this.apple = new Apple(this);
     this.render();
   };
   
@@ -79,7 +77,40 @@
       grid[coord.row][coord.col] = Snake.SYMBOL;
     });
     
+    //generate apple if it doesn't exist yet
+    if(typeof this.apple.pos === 'undefined') {
+      while(true) {
+        this.apple.generate();
+        var coord = this.apple.pos;
+        if(grid[coord.row][coord.col] !== Snake.SYMBOL) {
+          grid[coord.row][coord.col] = Apple.SYMBOL;
+          break;
+        }
+      }
+    }
+    else {
+      grid[this.apple.pos.row][this.apple.pos.col] = Apple.SYMBOL;
+    }
+    
+    this.grid = grid;  
     return grid;
+  };
+  
+  
+  //Apple object
+  var Apple = SnakeGame.Apple = function(board) {
+    this.board = board;
+    this.pos;
+  };
+  
+  Apple.SYMBOL = "A";
+  
+  Apple.prototype.generate = function() {
+    
+    var x = Math.floor(Math.random() * this.board.dim);
+    var y = Math.floor(Math.random() * this.board.dim);
+    
+    this.pos = new Coord(x, y);
   };
   
 })(this);

@@ -30,7 +30,6 @@
   View.prototype.step = function() {
     var gameOver = this.board.snake.move();
     if(gameOver) { 
-      alert("GAME OVER!");
       window.clearInterval(this.intervalID); 
     }
     else {
@@ -46,7 +45,9 @@
       for(var j = 0; j < grid[i].length; j++) {
         if(grid[i][j] === SnakeGame.Snake.SYMBOL)
           row += "<span class='cell snake'>" + grid[i][j] + "</span>";
-        else 
+        else if(grid[i][j] === SnakeGame.Apple.SYMBOL)
+          row += "<span class='cell apple'>" + grid[i][j] + "</span>";
+        else
           row += "<span class='cell'>" + grid[i][j] + "</span>";
       }
       this.$el.append("<div class='row'>" + row + "</div>");
