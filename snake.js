@@ -40,7 +40,7 @@
     this.segments.push(newHead);
     this.segments.shift();
     
-    //moved to apple (todo: add check for moving onto itself)
+    //moved to heart (todo: add check for moving onto itself)
     var pos = this.board.grid[newHead.row][newHead.col];
     this.checkMove(pos, moveCoord);  
     
@@ -48,10 +48,10 @@
   };
   
   Snake.prototype.checkMove = function(pos, moveCoord) {
-    if(pos === Apple.SYMBOL) {
+    if(pos === Heart.SYMBOL) {
       var last = _(this.segments).last();
       this.segments.push(last.plus(moveCoord));
-      this.board.apple.pos = null; //clear the apple eaten
+      this.board.heart.pos = null; //clear the heart eaten
     }
   }
   
@@ -71,7 +71,7 @@
   var Board = SnakeGame.Board = function(dim) {
     this.dim = dim;
     this.snake = new Snake(this);
-    this.apple = new Apple(this);
+    this.heart = new Heart(this);
     this.render();
   };
   
@@ -91,40 +91,40 @@
       grid[coord.row][coord.col] = Snake.SYMBOL;
     });
     
-    //generate apple if it doesn't exist yet
-    this.displayApple(grid);
+    //generate heart if it doesn't exist yet
+    this.displayHeart(grid);
     
     this.grid = grid; 
     return grid;
   };
   
   
-  Board.prototype.displayApple = function(grid) {
-    if(typeof this.apple.pos === 'undefined' || !this.apple.pos) {
+  Board.prototype.displayHeart = function(grid) {
+    if(typeof this.heart.pos === 'undefined' || !this.heart.pos) {
       while(true) {
-        this.apple.generate();
-        var coord = this.apple.pos;
+        this.heart.generate();
+        var coord = this.heart.pos;
         if(grid[coord.row][coord.col] !== Snake.SYMBOL) {
-          grid[coord.row][coord.col] = Apple.SYMBOL;
+          grid[coord.row][coord.col] = Heart.SYMBOL;
           break;
         }
       }
     }
     else {
-      grid[this.apple.pos.row][this.apple.pos.col] = Apple.SYMBOL;
+      grid[this.heart.pos.row][this.heart.pos.col] = Heart.SYMBOL;
     }
   }
   
   
-  //Apple object
-  var Apple = SnakeGame.Apple = function(board) {
+  //Heart object
+  var Heart = SnakeGame.Heart = function(board) {
     this.board = board;
     this.pos;
   };
   
-  Apple.SYMBOL = "&#10084";
+  Heart.SYMBOL = "&#10084";
   
-  Apple.prototype.generate = function() {
+  Heart.prototype.generate = function() {
     
     var x = Math.floor(Math.random() * this.board.dim);
     var y = Math.floor(Math.random() * this.board.dim);

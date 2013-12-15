@@ -46,8 +46,8 @@
       for(var j = 0; j < grid[i].length; j++) {
         if(grid[i][j] === SnakeGame.Snake.SYMBOL)
           row += "<span class='cell snake'>" + grid[i][j] + "</span>";
-        else if(grid[i][j] === SnakeGame.Apple.SYMBOL)
-          row += "<span class='cell apple'>" + grid[i][j] + "</span>";
+        else if(grid[i][j] === SnakeGame.Heart.SYMBOL)
+          row += "<span class='cell heart'>" + grid[i][j] + "</span>";
         else
           row += "<span class='cell'>" + grid[i][j] + "</span>";
       }
