@@ -24,18 +24,23 @@
   
   View.prototype.handleKeyEvent = function(event) {
     var dir = View.KEYS[event.keyCode];
-    if(dir) this.board.snake.turn(dir);  
+    if(dir) this.board.snake.turn(dir);
   };
   
   View.prototype.step = function() {
-    this.board.snake.move();
-    this.$el.empty();
-    this.render();
+    var gameOver = this.board.snake.move();
+    if(gameOver) { 
+      alert("GAME OVER!");
+      window.clearInterval(this.intervalID); 
+    }
+    else {
+      this.$el.empty();
+      this.render();
+    }
   };
   
   View.prototype.render = function() {
     var grid = this.board.render();
-    console.log(grid)
     for(var i = 0; i < grid.length; i++) {
       var row = "";
       for(var j = 0; j < grid[i].length; j++) {

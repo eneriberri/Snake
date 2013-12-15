@@ -33,13 +33,26 @@
   Snake.prototype.move = function() {
     var moveCoord = Snake.MOVES[this.dir];
     var head = _(this.segments).last();
-    this.segments.push(head.plus(moveCoord));
+    var newHead = head.plus(moveCoord);
+    this.segments.push(newHead);
     this.segments.shift();
+    
+    console.log(newHead.row);
+    console.log(newHead.col);
+    console.log(this.outOfBounds(newHead));
+    if(this.outOfBounds(newHead)) return true;
+    else return false;
   };
+  
+  Snake.prototype.outOfBounds = function(newHead) {
+    var border = this.board.dim;
+    return newHead.row < 0 || newHead.col < 0 || 
+           newHead.row >= border || newHead.col >= border;
+  }; 
   
   Snake.prototype.turn = function(newDir) {
     this.dir = newDir;
-  }
+  };
   
   Snake.SYMBOL = "S";
   
@@ -50,12 +63,14 @@
     this.render();
   };
   
+  Board.EMPTY_SPOT = "."
+  
   Board.prototype.render = function() {
     var grid = new Array(this.dim);
     for(var i = 0; i < grid.length; i++) {
       grid[i] = new Array(this.dim);
       for(var j = 0; j < grid[i].length; j++) {
-        grid[i][j] = ".";
+        grid[i][j] = Board.EMPTY_SPOT;
       }
     };
     
@@ -63,10 +78,6 @@
     _.each(this.snake.segments, function(coord) {
       grid[coord.row][coord.col] = Snake.SYMBOL;
     });
-    
-    console.log(_(grid).map(function (row) { //for debugging
-      return row.join(""); 
-    }).join("\n"));
     
     return grid;
   };
