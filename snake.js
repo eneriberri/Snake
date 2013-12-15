@@ -55,7 +55,7 @@
     for(var i = 0; i < grid.length; i++) {
       grid[i] = new Array(this.dim);
       for(var j = 0; j < grid[i].length; j++) {
-        grid[i][j] = "";
+        grid[i][j] = ".";
       }
     };
     

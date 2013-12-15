@@ -2,6 +2,7 @@
   display: inline-block;
   text-align: center;
   border: 1px solid white;
+  color: white;
   width: 20px;  
 }
 
@@ -11,4 +12,5 @@
 
 #grid {
  border: 1px solid black; 
+ display: inline-block;
 }
