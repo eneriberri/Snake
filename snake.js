@@ -41,6 +41,7 @@
     else if(this.board.grid[newHead.row][newHead.col] === Apple.SYMBOL) {
       var last = _(this.segments).last();
       this.segments.push(last.plus(moveCoord));
+      this.board.apple.pos = null;
     }
     return false;
   };
@@ -90,7 +91,7 @@
   
   
   Board.prototype.displayApple = function(grid) {
-    if(typeof this.apple.pos === 'undefined') {
+    if(typeof this.apple.pos === 'undefined' || !this.apple.pos) {
       while(true) {
         this.apple.generate();
         var coord = this.apple.pos;
