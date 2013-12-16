@@ -11,6 +11,10 @@
     return new Coord(this.row + coord.row, this.col + coord.col);
   };
   
+  Coord.prototype.equals = function(coord) {
+    return this.row === coord.row && this.col === coord.col;
+  }
+  
    
   //Snake obj
   var Snake = SnakeGame.Snake = function(board) {
@@ -35,16 +39,26 @@
     var head = _(this.segments).last();
     var newHead = head.plus(moveCoord);
     
-    if(this.outOfBounds(newHead)) return false; //out of bounds, game over
+    if(this.outOfBounds(newHead)) return false;
+    
+    var pos = this.board.grid[newHead.row][newHead.col];
+    if(this.collide(pos, newHead)) return false;
     
     this.segments.push(newHead);
     this.segments.shift();
     
-    //moved to heart (todo: add check for moving onto itself)
-    var pos = this.board.grid[newHead.row][newHead.col];
+    //moved to heart, expand body
     this.checkMove(pos, moveCoord);  
     
     return true;
+  };
+  
+  //checks to see if part of snake already at new pos
+  //ignores case at beginning when game starts
+  Snake.prototype.collide = function(pos, newHead) {
+    var center = Math.floor(this.board.dim/2);
+    if (newHead.equals(new Coord(center-1, center))) return;
+    return pos === Snake.SYMBOL;
   };
   
   Snake.prototype.checkMove = function(pos, moveCoord) {
