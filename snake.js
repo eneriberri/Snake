@@ -20,10 +20,11 @@
   var Snake = SnakeGame.Snake = function(board) {
     this.board = board;
     this.dir = "S";
+    this.start = true;
     var center = Math.floor(board.dim/2);
     this.segments = [new Coord(center, center), 
                      new Coord(center-1, center), 
-                     new Coord(center-2, center)];
+                     new Coord(center-2, center)];                    
   };
   
   Snake.MOVES = {
@@ -56,8 +57,10 @@
   //checks to see if part of snake already at new pos
   //ignores case at beginning when game starts
   Snake.prototype.collide = function(pos, newHead) {
-    var center = Math.floor(this.board.dim/2);
-    if (newHead.equals(new Coord(center-1, center))) return;
+    if(this.start) {
+      this.start = false;
+      return;
+    }
     return pos === Snake.SYMBOL;
   };
   

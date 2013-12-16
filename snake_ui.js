@@ -8,7 +8,8 @@
   
   View.DIMENSIONS = 20;
   
-  View.KEYS = {
+  //keycodes for arrow keys
+  View.DIR_KEYS = {
     37: "W",
     38: "N",
     39: "E",
@@ -23,7 +24,7 @@
   };
   
   View.prototype.handleKeyEvent = function(event) {
-    var dir = View.KEYS[event.keyCode];
+    var dir = View.DIR_KEYS[event.keyCode];
     if(dir) this.board.snake.turn(dir);
   };
   
@@ -58,9 +59,12 @@
   
   $(document).ready(function() {
     $('h3').fadeIn('slow');
+    $('#grid').hide();
     var SG = new SnakeGame.View($('#grid'));
+    
     //start game upon any key stroke, triggers event only once
     $(window).one('keydown', function() { 
+      $('#grid').show();
       SG.start();
       window.setTimeout(function() {
         $('#instructions').fadeIn('slow');
