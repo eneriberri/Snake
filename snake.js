@@ -61,7 +61,17 @@
            newHead.row >= border || newHead.col >= border;
   }; 
   
+  Snake.OPPOSITE_DIRS = {
+    "N": "S",
+    "S": "N",
+    "E": "W",
+    "W": "E"
+  };
+  
   Snake.prototype.turn = function(newDir) {
+    //can't move onto itself
+    if(newDir === Snake.OPPOSITE_DIRS[this.dir]) return;
+    
     this.dir = newDir;
   };
   
